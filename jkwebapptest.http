@@ -1,0 +1,6 @@
+@jkwebapptest_HostAddress = http://localhost:5068
+
+GET {{jkwebapptest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
