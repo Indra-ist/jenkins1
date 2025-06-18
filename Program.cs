@@ -22,4 +22,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Add root route
+app.MapGet("/", () => "Jenkins Web App is running!");
+
 app.Run();
