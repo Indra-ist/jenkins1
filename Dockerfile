@@ -17,8 +17,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/out .
 
-# Expose the port your app runs on (default for ASP.NET Core)
+# Expose port 80 for Azure App Service
 EXPOSE 80
+
+# Important: Let app bind to port 80 inside container
+ENV ASPNETCORE_URLS=http://+:80
 
 # Start the app
 ENTRYPOINT ["dotnet", "jkwebapptest.dll"]
