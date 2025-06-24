@@ -17,11 +17,12 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/out .
 
-# Expose port 80 for Azure App Service
-EXPOSE 80
+# Azure App Service expects port 8080 (not 80)
+EXPOSE 8080
 
-# Important: Let app bind to port 80 inside container
-ENV ASPNETCORE_URLS=http://+:80
+# Critical: Set ASPNETCORE_URLS to port 8080 for Azure App Service
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Production
 
 # Start the app
 ENTRYPOINT ["dotnet", "jkwebapptest.dll"]
